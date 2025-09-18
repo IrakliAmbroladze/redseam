@@ -49,14 +49,16 @@ export const Input = ({
       >
         {placeholder}
       </span>
-      <span
-        className={`absolute top-1/2 -translate-y-1/2 text-red-500 pointer-events-none ${userInput && "invisible"}`}
-        style={{
-          left: `${textWidth + 16}px`,
-        }}
-      >
-        *
-      </span>
+      {required && (
+        <span
+          className={`absolute top-1/2 -translate-y-1/2 text-red-500 pointer-events-none ${userInput && "invisible"}`}
+          style={{
+            left: `${textWidth + 16}px`,
+          }}
+        >
+          *
+        </span>
+      )}
       {type == "password" && (
         <button
           className="absolute right-2 top-1/2 -translate-y-1/2 text-red-500 cursor-pointer"
