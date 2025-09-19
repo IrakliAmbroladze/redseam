@@ -1,20 +1,15 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import { type Input as InputType } from "@/types";
 
 export const Input = ({
   placeholder = "",
   required = false,
   hasEyeIcon = false,
   name,
-  type,
-}: {
-  placeholder?: string;
-  required?: boolean;
-  hasEyeIcon?: boolean;
-  name: string;
-  type: string;
-}) => {
+  type = "text",
+}: InputType) => {
   const hiddenSpanRef = useRef<HTMLSpanElement>(null);
   const [textWidth, setTextWidth] = useState(0);
   const [userInput, setUserInput] = useState("");

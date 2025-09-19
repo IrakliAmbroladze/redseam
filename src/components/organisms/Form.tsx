@@ -1,10 +1,12 @@
 "use client";
 import { Input } from "@/components";
+import { type Input as InputType } from "@/types";
 import { useActionState } from "react";
 export const Form = ({
   children,
   title,
   action,
+  fields,
 }: {
   children?: React.ReactNode;
   title: string;
@@ -12,6 +14,7 @@ export const Form = ({
     prevState: { message: string },
     formData: FormData,
   ) => Promise<{ message: string }>;
+  fields: InputType[];
 }) => {
   const [state, formAction, isPending] = useActionState(action, {
     message: "",
@@ -25,6 +28,16 @@ export const Form = ({
           action={formAction}
           className="flex flex-col justify-between w-full gap-9"
         >
+          {fields.map((f, index) => (
+            <Input
+              key={index}
+              placeholder={f.placeholder}
+              required={f.required}
+              hasEyeIcon={f.hasEyeIcon}
+              name={f.name}
+              type={f.type}
+            />
+          ))}
           <Input name="email" placeholder="Email" required={true} type="text" />
           <Input
             name="password"
