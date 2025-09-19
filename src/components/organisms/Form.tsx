@@ -1,5 +1,5 @@
 "use client";
-import { Input } from "@/components";
+import { Input } from "../molecules";
 import { type Input as InputType } from "@/types";
 import { useActionState } from "react";
 export const Form = ({

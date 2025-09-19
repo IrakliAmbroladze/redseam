@@ -1,3 +1,8 @@
+import { RegistrationForm } from "@/components";
 export default function RegistrationPage() {
-  return <div>Registration Page</div>;
+  return (
+    <div className="flex flex-1">
+      <RegistrationForm />
+    </div>
+  );
 }
