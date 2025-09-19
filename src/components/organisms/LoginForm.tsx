@@ -12,5 +12,9 @@ export const LoginForm = () => {
       hasEyeIcon: true,
     },
   ];
-  return <Form title="Log in" action={loginUser} fields={formFields}></Form>;
+  return (
+    <div className="flex w-[554px] items-center m-40">
+      <Form title="Log in" action={loginUser} fields={formFields} />
+    </div>
+  );
 };

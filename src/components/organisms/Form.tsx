@@ -3,12 +3,10 @@ import { Input } from "@/components";
 import { type Input as InputType } from "@/types";
 import { useActionState } from "react";
 export const Form = ({
-  children,
   title,
   action,
   fields,
 }: {
-  children?: React.ReactNode;
   title: string;
   action: (
     prevState: { message: string },
@@ -21,42 +19,31 @@ export const Form = ({
   });
   console.log(state.message);
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full gap-20">
       <div className="text-5xl font-semibold">{title}</div>
-      <div className="flex flex-col w-[554px] h-[240px] bg-amber-400 ">
-        <form
-          action={formAction}
-          className="flex flex-col justify-between w-full gap-9"
-        >
-          {fields.map((f, index) => (
-            <Input
-              key={index}
-              placeholder={f.placeholder}
-              required={f.required}
-              hasEyeIcon={f.hasEyeIcon}
-              name={f.name}
-              type={f.type}
-            />
-          ))}
-          <Input name="email" placeholder="Email" required={true} type="text" />
+      <form
+        action={formAction}
+        className="flex flex-col justify-between w-full gap-9"
+      >
+        {fields.map((f, index) => (
           <Input
-            name="password"
-            required={true}
-            placeholder="Password"
-            hasEyeIcon={true}
-            type="password"
+            key={index}
+            placeholder={f.placeholder}
+            required={f.required}
+            hasEyeIcon={f.hasEyeIcon}
+            name={f.name}
+            type={f.type}
           />
-          <div className="flex flex-1 bg-blue-900 justify-center items-center">
-            <button
-              type="submit"
-              className="h-[42px] bg-[#FF4000] w-full rounded-xl"
-            >
-              {isPending ? "Logging in" : "Log in"}
-            </button>
-          </div>
-        </form>
-      </div>
-      <div>{children}</div>
+        ))}
+        <div className="flex flex-1 justify-center items-center">
+          <button
+            type="submit"
+            className="h-[42px] bg-[#FF4000] w-full rounded-xl"
+          >
+            {isPending ? "Logging in" : "Log in"}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
