@@ -1,7 +1,10 @@
 "use client";
-import { Input } from "../molecules";
+import React from "react";
+import { FieldList } from "../molecules";
 import { type Input as InputType } from "@/types";
 import { useActionState } from "react";
+import { SubmitButton } from "../atoms";
+
 export const Form = ({
   title,
   action,
@@ -27,24 +30,8 @@ export const Form = ({
         action={formAction}
         className="flex flex-col justify-between w-full gap-9"
       >
-        {fields.map((f, index) => (
-          <Input
-            key={index}
-            placeholder={f.placeholder}
-            required={f.required}
-            hasEyeIcon={f.hasEyeIcon}
-            name={f.name}
-            type={f.type}
-          />
-        ))}
-        <div className="flex flex-1 justify-center items-center">
-          <button
-            type="submit"
-            className="h-[42px] bg-[#FF4000] w-full rounded-xl text-white"
-          >
-            {isPending ? "processing ..." : btnText}
-          </button>
-        </div>
+        <FieldList fields={fields} />
+        <SubmitButton isPending={isPending} btnText={btnText} />
       </form>
     </div>
   );

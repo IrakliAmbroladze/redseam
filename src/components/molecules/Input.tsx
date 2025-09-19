@@ -1,9 +1,9 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { type Input as InputType } from "@/types";
 
-export const Input = ({
+const InputBase = ({
   placeholder = "",
   required = false,
   hasEyeIcon = false,
@@ -20,7 +20,7 @@ export const Input = ({
       setTextWidth(hiddenSpanRef.current.offsetWidth);
     }
   }, [placeholder]);
-  console.log("user input: ", userInput);
+  console.log("render:", name);
 
   return (
     <div className="relative">
@@ -56,6 +56,7 @@ export const Input = ({
       )}
       {type == "password" && hasEyeIcon && (
         <button
+          type="button"
           className="absolute right-2 top-1/2 -translate-y-1/2 text-red-500 cursor-pointer"
           onClick={() => setShowPassword((prev) => !prev)}
         >
@@ -65,3 +66,5 @@ export const Input = ({
     </div>
   );
 };
+
+export const Input = React.memo(InputBase);
