@@ -11,7 +11,7 @@ export const Form = ({
   action: (
     prevState: { message: string },
     formData: FormData,
-  ) => { message: string };
+  ) => Promise<{ message: string }>;
 }) => {
   const [state, formAction, isPending] = useActionState(action, {
     message: "",
