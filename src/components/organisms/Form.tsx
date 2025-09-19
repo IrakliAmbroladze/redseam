@@ -6,6 +6,7 @@ export const Form = ({
   title,
   action,
   fields,
+  btnText = "submit",
 }: {
   title: string;
   action: (
@@ -13,6 +14,7 @@ export const Form = ({
     formData: FormData,
   ) => Promise<{ message: string }>;
   fields: InputType[];
+  btnText?: string;
 }) => {
   const [state, formAction, isPending] = useActionState(action, {
     message: "",
@@ -38,9 +40,9 @@ export const Form = ({
         <div className="flex flex-1 justify-center items-center">
           <button
             type="submit"
-            className="h-[42px] bg-[#FF4000] w-full rounded-xl"
+            className="h-[42px] bg-[#FF4000] w-full rounded-xl text-white"
           >
-            {isPending ? "Logging in" : "Log in"}
+            {isPending ? "processing ..." : btnText}
           </button>
         </div>
       </form>

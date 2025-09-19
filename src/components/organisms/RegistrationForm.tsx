@@ -23,7 +23,12 @@ export const RegistrationForm = () => {
   ];
   return (
     <div className="flex w-[554px] justify-center items-center m-40 flex-col gap-5">
-      <Form title="Registration" action={loginUser} fields={formFields} />
+      <Form
+        title="Registration"
+        action={loginUser}
+        fields={formFields}
+        btnText="Registration"
+      />
       <div>
         already member?{" "}
         <Link href="./login" className="text-[#FF4000]">
