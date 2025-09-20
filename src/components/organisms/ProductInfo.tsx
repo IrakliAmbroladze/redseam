@@ -1,5 +1,6 @@
 import { Product } from "@/types";
 import Image from "next/image";
+import { OrangeButton } from "../atoms";
 
 export const ProductInfo = ({ product }: { product: Product }) => {
   return (
@@ -45,7 +46,9 @@ export const ProductInfo = ({ product }: { product: Product }) => {
           </select>
         </div>
 
-        <button>Add to Cart</button>
+        <OrangeButton px={60} py={16}>
+          Add to Cart
+        </OrangeButton>
 
         <div className="border border-[#E1DFE1]"> </div>
 
