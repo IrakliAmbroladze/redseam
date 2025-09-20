@@ -15,21 +15,25 @@ export default async function Page({
   return (
     <div className="px-[100px]">
       <div>listing/product</div>
-      <div className="flex">
-        <div className="flex flex-col gap-[9px]">
-          {data &&
-            data.images.map((image) => (
-              <Image
-                key={image}
-                src={image}
-                width={121}
-                height={161}
-                alt="image"
-              />
-            ))}
+      <div className="flex justify-between">
+        <div className="flex gap-2.5">
+          <div className="flex flex-col gap-[9px]">
+            {data &&
+              data.images.map((image) => (
+                <Image
+                  key={image}
+                  src={image}
+                  width={121}
+                  height={161}
+                  alt="image"
+                />
+              ))}
+          </div>
+          <Image src={data.cover_image} width={703} height={937} alt="image" />
         </div>
-        <Image src={data.cover_image} width={703} height={937} alt="image" />
-        {data && <ProductInfo product={data} />}
+        <div className="w-[703px]">
+          {data && <ProductInfo product={data} />}
+        </div>
       </div>
     </div>
   );
