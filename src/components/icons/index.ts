@@ -1,0 +1,1 @@
+export { CartIconWhite } from "./CartIconWhite";
