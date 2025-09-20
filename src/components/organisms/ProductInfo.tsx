@@ -1,6 +1,7 @@
 import { Product } from "@/types";
 import Image from "next/image";
 import { OrangeButton } from "../atoms";
+import { CartIconWhite } from "../icons";
 
 export const ProductInfo = ({ product }: { product: Product }) => {
   return (
@@ -47,7 +48,10 @@ export const ProductInfo = ({ product }: { product: Product }) => {
         </div>
 
         <OrangeButton px={60} py={16}>
-          Add to Cart
+          <div className="flex justify-center gap-2.5">
+            <CartIconWhite />
+            Add to Cart
+          </div>
         </OrangeButton>
 
         <div className="border border-[#E1DFE1]"> </div>
