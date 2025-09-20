@@ -1,0 +1,25 @@
+import React from "react";
+
+export const OrangeButton = React.memo(function SubmitButton({
+  type = "submit",
+  children,
+  px = 20,
+  py = 10,
+}: {
+  type?: "button" | "submit";
+  children: React.ReactNode;
+  px?: number;
+  py?: number;
+}) {
+  return (
+    <button
+      type={type}
+      className="bg-[#FF4000] rounded-xl text-white font-medium"
+      style={{
+        padding: `${py}px ${px}px`,
+      }}
+    >
+      {children}
+    </button>
+  );
+});
