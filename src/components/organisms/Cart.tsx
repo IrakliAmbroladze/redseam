@@ -31,7 +31,7 @@ export const Cart = ({
         </div>
         <div className="flex flex-col justify-between h-full overflow-hidden">
           <CartBody />
-          <CartFooter />
+          <CartFooter setIsShown={setIsShown} />
         </div>
       </div>
     </div>,
