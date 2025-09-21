@@ -1,6 +1,11 @@
+import Link from "next/link";
 import { OrangeButton } from "../atoms";
 
-export const CartFooter = () => (
+export const CartFooter = ({
+  setIsShown,
+}: {
+  setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
+}) => (
   <div className="flex flex-col gap-[100px] pt-2.5">
     <div className="flex flex-col gap-[16px]">
       <div className="flex justify-between text-[16px]">
@@ -17,8 +22,10 @@ export const CartFooter = () => (
         <div>$ 55</div>
       </div>
     </div>
-    <OrangeButton px={60} py={16}>
-      Go to checkout
-    </OrangeButton>
+    <Link href="/checkout" onClick={() => setIsShown(false)}>
+      <OrangeButton px={60} py={16}>
+        Go to checkout
+      </OrangeButton>
+    </Link>
   </div>
 );
