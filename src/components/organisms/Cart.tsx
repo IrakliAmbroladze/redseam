@@ -2,6 +2,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { CartBody, CartFooter } from "../molecules";
 
 export const Cart = ({
   setIsShown,
@@ -18,21 +19,22 @@ export const Cart = ({
       className="fixed inset-0 bg-[#10151F]/30 flex items-center justify-end z-50"
       onClick={handleOverlayClick}
     >
-      <div className="bg-white p-6 w-[540px] shadow-lg relative h-full overflow-y-auto">
-        <button
-          onClick={() => setIsShown(false)}
-          className="absolute top-10 right-10 text-[#10151F] hover:text-gray-700 cursor-pointer text-2xl"
-        >
-          ✕
-        </button>
+      <div className="bg-white p-10 w-[540px] shadow-lg h-full overflow-y-auto flex flex-col">
+        <div className="flex justify-between">
+          <div className="text-xl">Shopping Cart (0)</div>
+          <button
+            onClick={() => setIsShown(false)}
+            className=" text-[#10151F] hover:text-gray-700 cursor-pointer text-2xl"
+          >
+            ✕
+          </button>
+        </div>
+        <div className="flex flex-col justify-between h-full overflow-hidden">
+          <CartBody />
+          <CartFooter />
+        </div>
       </div>
     </div>,
     document.body,
   );
 };
-
-{
-  /*
-
-;*/
-}
