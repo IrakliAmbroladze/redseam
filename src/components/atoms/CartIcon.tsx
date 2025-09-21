@@ -10,7 +10,7 @@ export const CartIcon = () => {
       <button onClick={() => setIsShown((prev) => !prev)}>
         <CartIconBlack />
       </button>
-      {isShown && <Cart />}
+      {isShown && <Cart setIsShown={setIsShown} />}
     </>
   );
 };
