@@ -1,4 +1,4 @@
-import { ProductInfo } from "@/components";
+import { Breadcrumbs, ProductInfo } from "@/components";
 import { getProduct } from "@/lib";
 import Image from "next/image";
 
@@ -17,7 +17,7 @@ export default async function Page({
     );
   return (
     <div className="px-[100px]">
-      <div>listing/product</div>
+      <Breadcrumbs id={id} />
       <div className="flex justify-between">
         <div className="flex gap-2.5">
           <div className="flex flex-col gap-[9px]">
