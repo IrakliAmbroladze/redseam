@@ -2,7 +2,9 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { CartBody, CartFooter } from "../molecules";
+import Link from "next/link";
+import { OrangeButton } from "../atoms";
+import { CartBoard } from "./CartBoard";
 
 export const Cart = ({
   setIsShown,
@@ -19,7 +21,7 @@ export const Cart = ({
       className="fixed inset-0 bg-[#10151F]/30 flex items-center justify-end z-50"
       onClick={handleOverlayClick}
     >
-      <div className="bg-white p-10 w-[540px] shadow-lg h-full overflow-y-auto flex flex-col">
+      <div className="bg-white p-10 w-[540px] shadow-lg max-h-dvh  flex flex-col gap-20">
         <div className="flex justify-between">
           <div className="text-xl">Shopping Cart (0)</div>
           <button
@@ -29,10 +31,12 @@ export const Cart = ({
             ✕
           </button>
         </div>
-        <div className="flex flex-col justify-between h-full overflow-hidden">
-          <CartBody />
-          <CartFooter setIsShown={setIsShown} />
-        </div>
+        <CartBoard />
+        <Link href="/checkout" onClick={() => setIsShown(false)}>
+          <OrangeButton px={60} py={16}>
+            Go to checkout
+          </OrangeButton>
+        </Link>
       </div>
     </div>,
     document.body,
