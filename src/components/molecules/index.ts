@@ -4,4 +4,4 @@ export { Filters } from "./Filters";
 export { ProductsHeadLine } from "./ProductsHeadLine";
 export { Pagination } from "./Pagination";
 export { CartBody } from "./CartBody";
-export { CartFooter } from "./CartFooter";
+export { CartTotals } from "./CartTotals";
