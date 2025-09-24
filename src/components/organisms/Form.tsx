@@ -22,9 +22,8 @@ export const Form = ({
   const [state, formAction, isPending] = useActionState(action, {
     message: "",
   });
-  console.log(state.message);
   return (
-    <div className="flex flex-col w-full gap-20">
+    <div className="flex flex-col w-full gap-20 relative">
       <div className="text-5xl font-semibold">{title}</div>
       <form
         action={formAction}
@@ -33,6 +32,9 @@ export const Form = ({
         <FieldList fields={fields} />
         <SubmitButton isPending={isPending} btnText={btnText} />
       </form>
+      <div className="text-sm absolute text-red-500 bottom-12 left-[25%]">
+        {state.message}
+      </div>
     </div>
   );
 };
