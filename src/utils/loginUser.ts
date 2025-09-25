@@ -29,15 +29,18 @@ export const loginUser = async (_: { message: string }, formData: FormData) => {
       "https://api.redseam.redberryinternship.ge/api/login",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ email, password }),
       },
     );
-
+    const data = await response.json();
     if (!response.ok) {
-      return { message: "Can not log in, please Register!" };
+      throw new Error(data?.message ?? "Can not log in, please Register!");
     }
-    const { token } = await response.json();
+    const { token } = data;
     cookieStore.set("token", token, {
       httpOnly: true,
       secure: true,
@@ -47,12 +50,14 @@ export const loginUser = async (_: { message: string }, formData: FormData) => {
     });
   } catch (e) {
     if (e instanceof Error) {
-      console.log("error is e.message", e.message);
-      return { message: "" };
+      console.error(e.message);
+      if (e.message == "Unauthenticated.") {
+        return { message: "Not authenticated, please Register or try again!" };
+      }
     } else {
-      console.log("Uknown error while logging an user", e);
-      return { message: "" };
+      console.error("Uknown error: ", e);
     }
+    return { message: "Can not log in an user" };
   }
   redirect("/");
 };
