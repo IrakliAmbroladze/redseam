@@ -1,5 +1,5 @@
 import { Form } from "./Form";
-import { loginUser } from "@/utils";
+import { registerUser } from "@/utils";
 import type { Input } from "@/types";
 import Link from "next/link";
 export const RegistrationForm = () => {
@@ -25,7 +25,7 @@ export const RegistrationForm = () => {
     <div className="flex w-[554px] justify-center items-center m-40 flex-col gap-5">
       <Form
         title="Registration"
-        action={loginUser}
+        action={registerUser}
         fields={formFields}
         btnText="Registration"
       />
