@@ -14,7 +14,7 @@ export const OrangeButton = React.memo(function SubmitButton({
   return (
     <button
       type={type}
-      className="bg-[#FF4000] rounded-xl text-white font-medium"
+      className="bg-[#FF4000] rounded-xl text-white font-medium cursor-pointer active:scale-95 transition-transform ease-in-out duration-150 w-full"
       style={{
         padding: `${py}px ${px}px`,
       }}
