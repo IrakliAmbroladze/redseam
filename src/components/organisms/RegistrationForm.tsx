@@ -14,7 +14,7 @@ export const RegistrationForm = () => {
       hasEyeIcon: true,
     },
     {
-      name: "confirmpassword",
+      name: "password_confirmation",
       placeholder: "Confirm password",
       required: true,
       type: "password",

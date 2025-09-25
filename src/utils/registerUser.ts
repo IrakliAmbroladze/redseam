@@ -10,7 +10,7 @@ export const registerUser = async (
   const username = formData.get("username");
   const email = formData.get("email");
   const password = formData.get("password");
-  const confirmpassword = formData.get("confirmpassword");
+  const password_confirmation = formData.get("password_confirmation");
   if (!username) {
     return { message: "please, provide an usename at least 3 characters long" };
   }
@@ -33,28 +33,30 @@ export const registerUser = async (
   if (password.toString().length < 3) {
     return { message: "Password must be at least 3 characters long." };
   }
-  if (!confirmpassword) {
+  if (!password_confirmation) {
     return { message: "please, confirm the password" };
   }
-  if (password.toString() !== confirmpassword.toString()) {
+  if (password.toString() !== password_confirmation.toString()) {
     return { message: "Please make sure your passwords match" };
   }
   const cookieStore = await cookies();
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   try {
     const response = await fetch(
-      "https://api.redseam.redberryinternship.ge/api/login",
+      "https://api.redseam.redberryinternship.ge/api/register",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
       },
     );
-
+    const data = await response.json();
     if (!response.ok) {
-      return { message: "Can not log in, please Register!" };
+      throw new Error(data?.message ?? "Can not register, try again!");
     }
-    const { token } = await response.json();
+    const { token } = data;
     cookieStore.set("token", token, {
       httpOnly: true,
       secure: true,
@@ -64,11 +66,10 @@ export const registerUser = async (
     });
   } catch (e) {
     if (e instanceof Error) {
-      console.log("error is e.message", e.message);
-      return { message: "" };
+      return { message: e.message };
     } else {
-      console.log("Uknown error while logging an user", e);
-      return { message: "" };
+      console.log(e);
+      return { message: "Can not register an user" };
     }
   }
   redirect("/");
