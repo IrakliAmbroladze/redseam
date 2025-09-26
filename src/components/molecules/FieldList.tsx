@@ -1,6 +1,7 @@
 import { type Input as InputType } from "@/types";
 import React from "react";
 import { Input } from "./Input";
+import { UploadImage } from "./UploadImage";
 
 export const FieldList = React.memo(function FieldList({
   fields,
@@ -9,7 +10,8 @@ export const FieldList = React.memo(function FieldList({
 }) {
   return (
     <>
-      <input type="file" accept="image/*" id="avatar" name="avatar" />
+      <UploadImage />
+
       {fields.map((f) => (
         <Input key={f.name} {...f} />
       ))}
