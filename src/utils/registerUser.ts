@@ -56,8 +56,15 @@ export const registerUser = async (
     if (!response.ok) {
       throw new Error(data?.message ?? "Can not register, try again!");
     }
-    const { token } = data;
+    const { token, user } = data;
     cookieStore.set("token", token, {
+      httpOnly: true,
+      secure: true,
+      expires: expiresAt,
+      sameSite: "none",
+      path: "/",
+    });
+    cookieStore.set("avatar", user.avatar, {
       httpOnly: true,
       secure: true,
       expires: expiresAt,
