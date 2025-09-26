@@ -40,8 +40,15 @@ export const loginUser = async (_: { message: string }, formData: FormData) => {
     if (!response.ok) {
       throw new Error(data?.message ?? "Can not log in, please Register!");
     }
-    const { token } = data;
+    const { token, user } = data;
     cookieStore.set("token", token, {
+      httpOnly: true,
+      secure: true,
+      expires: expiresAt,
+      sameSite: "none",
+      path: "/",
+    });
+    cookieStore.set("avatar", user.avatar, {
       httpOnly: true,
       secure: true,
       expires: expiresAt,
