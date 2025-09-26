@@ -9,6 +9,7 @@ export const FieldList = React.memo(function FieldList({
 }) {
   return (
     <>
+      <input type="file" accept="image/*" id="avatar" name="avatar" />
       {fields.map((f) => (
         <Input key={f.name} {...f} />
       ))}

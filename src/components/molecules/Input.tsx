@@ -20,7 +20,6 @@ const InputBase = ({
       setTextWidth(hiddenSpanRef.current.offsetWidth);
     }
   }, [placeholder]);
-  console.log("render:", name);
 
   return (
     <div className="relative">
