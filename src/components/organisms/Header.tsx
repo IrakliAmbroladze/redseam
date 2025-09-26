@@ -22,7 +22,11 @@ export const Header = async () => {
       <div className="flex gap-5">
         <CartIcon />
         <div className="w-[20px] h-[20px] relative">
-          {hasAvatar ? "avatar" : <Image src="/user.svg" alt="logo" fill />}
+          <Image
+            src={hasAvatar ? (avatar?.value ?? "") : "/user.svg"}
+            alt="avatar"
+            fill
+          />
         </div>
 
         <Link href="/login" className="flex items-center text-[#10151F]">
