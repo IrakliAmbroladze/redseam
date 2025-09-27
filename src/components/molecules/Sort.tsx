@@ -1,15 +1,27 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import { SortModal } from "./SortModal";
+import { Dispatch, SetStateAction } from "react";
 
-export const Sort = () => {
-  const [isSortModalOpen, setIsSortModalOpen] = useState<boolean>(false);
+type SortProps = {
+  isSortModalOpen: boolean;
+  setIsSortModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsPriceModalOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+export const Sort = ({
+  isSortModalOpen,
+  setIsSortModalOpen,
+  setIsPriceModalOpen,
+}: SortProps) => {
   return (
     <div className="cursor-pointer relative">
       <div
         className="flex gap-2 items-center"
-        onClick={() => setIsSortModalOpen((prev) => !prev)}
+        onClick={() => {
+          setIsPriceModalOpen(false);
+          setIsSortModalOpen((prev) => !prev);
+        }}
       >
         <span className="text-[16px]">Sort by</span>
         <button className="w-[20px] h-[20px] relative">
