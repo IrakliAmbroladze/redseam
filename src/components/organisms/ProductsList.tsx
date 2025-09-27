@@ -1,12 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { type ProductListItem } from "@/types";
+import { getProducts } from "@/lib";
 export const ProductsList = async () => {
-  const response = await fetch(
-    "https://api.redseam.redberryinternship.ge/api/products",
-  );
-  const json = await response.json();
-  const { data }: { data: ProductListItem[] } = json;
+  const data: ProductListItem[] = await getProducts();
   return (
     <div className="grid grid-cols-4 gap-6">
       {data.map((item) => (
