@@ -9,8 +9,8 @@ export const Header = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get("token");
   const avatar = cookieStore.get("avatar");
-  const isLoggedIn = Boolean(token?.value);
-  const hasAvatar = Boolean(avatar?.value);
+  const isLoggedIn = token && Boolean(token.value);
+  const hasAvatar = avatar && Boolean(avatar.value);
   return (
     <nav className="fixed h-20 w-[1920px] z-50 flex items-center justify-between py-2.5 px-[100px] bg-white">
       <Link href="/" className="flex items-center text-[#10151F]">
@@ -20,7 +20,7 @@ export const Header = async () => {
         <span className="text-[16px] font-semibold ">RedSeam Clothing</span>
       </Link>
       <div className="flex gap-5">
-        <CartIcon />
+        {isLoggedIn && <CartIcon />}
         <div className="w-[20px] h-[20px] relative">
           <Image
             src={hasAvatar ? (avatar?.value ?? "") : "/user.svg"}
