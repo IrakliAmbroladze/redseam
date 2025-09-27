@@ -4,10 +4,12 @@ export const getProducts = async ({
   page,
   from,
   to,
+  sort,
 }: {
   page?: number;
   from?: number;
   to?: number;
+  sort?: "price" | "-price" | "created_at" | "-created_at";
 } = {}) => {
   const pathname = "https://api.redseam.redberryinternship.ge/api/products";
   const params = new URLSearchParams();
@@ -15,6 +17,7 @@ export const getProducts = async ({
   if (page !== undefined) params.append("page", String(page));
   if (from !== undefined) params.append("filter[price_from]", String(from));
   if (to !== undefined) params.append("filter[price_to]", String(to));
+  if (sort !== undefined) params.append("sort", sort);
 
   const url = `${pathname}?${params.toString()}`;
   try {
