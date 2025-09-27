@@ -28,6 +28,7 @@ export const RegistrationForm = () => {
         action={registerUser}
         fields={formFields}
         btnText="Registration"
+        type="register"
       />
       <div>
         already member?{" "}

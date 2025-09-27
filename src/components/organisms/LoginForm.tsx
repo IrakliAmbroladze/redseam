@@ -20,6 +20,7 @@ export const LoginForm = () => {
         action={loginUser}
         fields={formFields}
         btnText="Log in"
+        type="login"
       />
       <div>
         not a member?{" "}
