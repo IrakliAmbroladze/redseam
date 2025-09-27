@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PriceFilter } from "./PriceFilter";
+import { Sort } from "./Sort";
 
 export const Filters = () => {
   return (
@@ -9,12 +10,7 @@ export const Filters = () => {
       </span>
       <span className="text-[#E1DFE1] text-[12px]">|</span>
       <PriceFilter />
-      <div className="flex gap-2 items-center">
-        <span className="text-[16px]">Sort by</span>
-        <button className="w-[20px] h-[20px] relative">
-          <Image src="/stroke.svg" alt="filter" fill />
-        </button>
-      </div>
+      <Sort />
     </div>
   );
 };
