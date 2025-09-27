@@ -1,12 +1,10 @@
+import { ProductListItem } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { type ProductListItem } from "@/types";
-import { getProducts } from "@/lib";
-export const ProductsList = async () => {
-  const data: ProductListItem[] = await getProducts();
+export const ProductsList = ({ products }: { products: ProductListItem[] }) => {
   return (
     <div className="grid grid-cols-4 gap-6">
-      {data.map((item) => (
+      {products.map((item) => (
         <div key={item.id}>
           <Link href={`/${item.id}`} className="flex flex-col">
             <Image
