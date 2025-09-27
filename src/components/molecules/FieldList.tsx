@@ -5,12 +5,14 @@ import { UploadImage } from "./UploadImage";
 
 export const FieldList = React.memo(function FieldList({
   fields,
+  formType,
 }: {
   fields: InputType[];
+  formType: "login" | "register";
 }) {
   return (
     <>
-      <UploadImage />
+      {formType == "register" && <UploadImage />}
 
       {fields.map((f) => (
         <Input key={f.name} {...f} />

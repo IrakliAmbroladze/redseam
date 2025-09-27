@@ -10,6 +10,7 @@ export const Form = ({
   action,
   fields,
   btnText = "submit",
+  type,
 }: {
   title: string;
   action: (
@@ -18,6 +19,7 @@ export const Form = ({
   ) => Promise<{ message: string }>;
   fields: InputType[];
   btnText?: string;
+  type: "login" | "register";
 }) => {
   const [state, formAction, isPending] = useActionState(action, {
     message: "",
@@ -29,7 +31,7 @@ export const Form = ({
         action={formAction}
         className="flex flex-col justify-between w-full gap-9"
       >
-        <FieldList fields={fields} />
+        <FieldList fields={fields} formType={type} />
         <SubmitButton isPending={isPending} btnText={btnText} />
       </form>
       <div className="text-sm absolute text-red-500 bottom-12 left-[25%]">
