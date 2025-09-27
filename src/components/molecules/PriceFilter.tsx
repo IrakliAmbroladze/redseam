@@ -1,15 +1,27 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import { PriceModal } from "./PriceModal";
+import { Dispatch, SetStateAction } from "react";
 
-export const PriceFilter = () => {
-  const [isPriceModalOpen, setIsPriceModalOpen] = useState<boolean>(false);
+type PriceFilterProps = {
+  isPriceModalOpen: boolean;
+  setIsSortModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsPriceModalOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+export const PriceFilter = ({
+  isPriceModalOpen,
+  setIsPriceModalOpen,
+  setIsSortModalOpen,
+}: PriceFilterProps) => {
   return (
     <div className="cursor-pointer relative">
       <div
         className="flex gap-2"
-        onClick={() => setIsPriceModalOpen((prev) => !prev)}
+        onClick={() => {
+          setIsSortModalOpen(false);
+          setIsPriceModalOpen((prev) => !prev);
+        }}
       >
         <button className="w-[24px] h-[24px] relative">
           <Image src="/filter.svg" alt="filter" fill />
