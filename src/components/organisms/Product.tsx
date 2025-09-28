@@ -15,6 +15,7 @@ export const Product = ({ product }: { product: ProductType }) => {
     color: string;
     size: "XS" | "S" | "M" | "L" | "XL";
   }>(initialProduct);
+
   return (
     <div className="flex justify-between">
       <div className="flex gap-2.5">
