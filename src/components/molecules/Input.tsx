@@ -28,9 +28,7 @@ const InputBase = ({
         value={userInput}
         onChange={(e) => setUserInput(e.target.value)}
         className="h-[42px] w-full rounded-xl border border-[#E1DFE1] focus:border-[#10151F] focus:outline-none placeholder-[#3E424A]"
-        type={
-          type == "password" ? (showPassword ? "text" : "password") : "text"
-        }
+        type={type == "password" ? (showPassword ? "text" : "password") : type}
         placeholder={placeholder}
         style={{
           textIndent: "8px",
