@@ -1,8 +1,12 @@
+"use client";
+
 import { Product } from "@/types";
 import Image from "next/image";
 import { OrangeButton } from "../atoms";
 import { CartIconWhite } from "../icons";
 import { Dispatch, SetStateAction } from "react";
+import { addToCart } from "@/lib";
+import { useState } from "react";
 
 export const ProductInfo = ({
   product,
@@ -23,6 +27,27 @@ export const ProductInfo = ({
     }>
   >;
 }) => {
+  const [status, setStatus] = useState<{
+    message: string;
+    success: boolean;
+  } | null>(null);
+  const handleApply = async () => {
+    try {
+      const response = await addToCart({ ...selectedProduct, id: product.id });
+      setStatus({ message: response?.message ?? "Added!", success: true });
+    } catch (error) {
+      if (error instanceof Error) {
+        setStatus({ message: error.message, success: false });
+      } else {
+        setStatus({
+          message: "Unknown error while adding to cart",
+          success: false,
+        });
+      }
+    }
+
+    setTimeout(() => setStatus(null), 2000);
+  };
   return (
     <div className="flex flex-col gap-14">
       <div className="flex flex-col gap-[21px] font-semibold text-[32px]">
@@ -87,10 +112,22 @@ export const ProductInfo = ({
           </select>
         </div>
 
-        <OrangeButton px={60} py={16}>
+        <OrangeButton px={60} py={16} onClick={handleApply}>
           <div className="flex justify-center gap-2.5">
-            <CartIconWhite />
-            Add to Cart
+            {status ? (
+              <div
+                className={`text-center font-medium ${
+                  status.success ? "text-green-600" : "text-red-100"
+                }`}
+              >
+                {status.message}
+              </div>
+            ) : (
+              <>
+                <CartIconWhite />
+                <span>Add to Cart</span>
+              </>
+            )}
           </div>
         </OrangeButton>
 

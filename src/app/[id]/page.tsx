@@ -1,6 +1,5 @@
 import { Breadcrumbs, Product } from "@/components";
 import { getProduct } from "@/lib";
-import Image from "next/image";
 
 export default async function Page({
   params,
