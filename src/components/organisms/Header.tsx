@@ -21,7 +21,7 @@ export const Header = async () => {
       </Link>
       <div className="flex gap-5">
         {isLoggedIn && <CartIcon />}
-        <div className="w-[20px] h-[20px] relative">
+        <div className="w-10 h-10 relative">
           <Image
             src={hasAvatar ? (avatar?.value ?? "") : "/user.svg"}
             alt="avatar"
