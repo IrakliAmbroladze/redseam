@@ -52,7 +52,7 @@ export const Cart = ({
     >
       <div className="bg-white p-10 w-[540px] shadow-lg max-h-dvh  flex flex-col gap-20">
         <div className="flex justify-between">
-          <div className="text-xl">Shopping Cart (0)</div>
+          <div className="text-xl">Shopping Cart ({cart?.length || 0})</div>
           <button
             onClick={() => setIsShown(false)}
             className=" text-[#10151F] hover:text-gray-700 cursor-pointer text-2xl"

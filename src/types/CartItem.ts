@@ -9,7 +9,7 @@ export type CartItem = {
   available_colors: string[];
   available_sizes: string[];
   total_price: number;
-  quantity: 6;
+  quantity: number;
   color: string;
   size: "XS" | "S" | "M" | "L" | "XL";
 };

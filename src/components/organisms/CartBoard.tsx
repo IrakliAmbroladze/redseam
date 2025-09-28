@@ -5,7 +5,7 @@ export const CartBoard = ({ cart }: { cart: CartItem[] }) => {
   return (
     <div className="flex flex-col justify-between h-full overflow-hidden gap-20">
       <CartBody cart={cart} />
-      <CartTotals />
+      <CartTotals cart={cart} />
     </div>
   );
 };
