@@ -1,21 +1,48 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Link from "next/link";
 import { OrangeButton } from "../atoms";
 import { CartBoard } from "./CartBoard";
+import { getCart } from "@/lib";
 
 export const Cart = ({
   setIsShown,
 }: {
   setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const [cart, setCart] = useState(null);
+  const [status, setStatus] = useState<{
+    message: string;
+    success: boolean;
+  } | null>(null);
+
+  useEffect(() => {
+    try {
+      const fetchCart = async () => {
+        const response = await getCart();
+        const { data } = response;
+        setCart(data);
+      };
+      fetchCart();
+    } catch (error) {
+      if (error instanceof Error) {
+        setStatus({ message: error.message, success: false });
+      } else {
+        setStatus({
+          message: "Unknown error while adding to cart",
+          success: false,
+        });
+      }
+    }
+  }, []);
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       setIsShown(false);
     }
   };
+  console.log("cart data is: ", cart);
   return ReactDOM.createPortal(
     <div
       className="fixed inset-0 bg-[#10151F]/30 flex items-center justify-end z-50"
