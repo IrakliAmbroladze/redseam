@@ -1,5 +1,8 @@
 "use server";
-import { type ProductListItem } from "@/types";
+import { Meta, ProductListItem } from "@/types";
+
+type DataObj = { data: ProductListItem[]; meta: Meta };
+
 export const getProducts = async ({
   page,
   from,
@@ -29,16 +32,13 @@ export const getProducts = async ({
     if (!response.ok) {
       throw new Error(`Request failed: ${response.status}`);
     }
-    const json = await response.json();
-    const { data }: { data: ProductListItem[] } = json;
-    return data;
+    const dataObj: DataObj = await response.json();
+    return dataObj;
   } catch (error) {
     if (error instanceof Error) {
       console.warn(error.message);
-      return [];
     } else {
       console.log("Uknown error while fetching products");
-      return [];
     }
   }
 };
