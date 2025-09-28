@@ -1,0 +1,41 @@
+"use server";
+import { cookies } from "next/headers";
+
+export const getCart = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+
+  if (!token) {
+    throw new Error("Unauthenticated. Please, login ot register!");
+  }
+  try {
+    const response = await fetch(
+      `https://api.redseam.redberryinternship.ge/api/cart`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      },
+    );
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data?.message ?? "Can not log in, please Register!");
+    }
+
+    return { message: "Product added to cart!", data };
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e.message);
+      if (e.message == "Unauthenticated.") {
+        return {
+          message: "Not authenticated, please Register or Login again!",
+        };
+      }
+    } else {
+      console.error("Uknown error: ", e);
+    }
+    return { message: "Can not log in an user" };
+  }
+};
