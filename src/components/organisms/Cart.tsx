@@ -6,13 +6,14 @@ import Link from "next/link";
 import { OrangeButton } from "../atoms";
 import { CartBoard } from "./CartBoard";
 import { getCart } from "@/lib";
+import { CartItem } from "@/types/CartItem";
 
 export const Cart = ({
   setIsShown,
 }: {
   setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [cart, setCart] = useState(null);
+  const [cart, setCart] = useState<CartItem[] | null>(null);
   const [status, setStatus] = useState<{
     message: string;
     success: boolean;
@@ -35,14 +36,15 @@ export const Cart = ({
           success: false,
         });
       }
+    } finally {
+      console.log(status);
     }
-  }, []);
+  }, [status]);
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       setIsShown(false);
     }
   };
-  console.log("cart data is: ", cart);
   return ReactDOM.createPortal(
     <div
       className="fixed inset-0 bg-[#10151F]/30 flex items-center justify-end z-50"
@@ -58,7 +60,7 @@ export const Cart = ({
             ✕
           </button>
         </div>
-        <CartBoard />
+        <CartBoard cart={cart ?? []} />
         <Link href="/checkout" onClick={() => setIsShown(false)}>
           <OrangeButton px={60} py={16}>
             Go to checkout
