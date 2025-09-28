@@ -9,7 +9,7 @@ import { useActionState, useEffect, useState } from "react";
 const CheckoutPage = () => {
   const [state, formAction, isPending] = useActionState(checkout, {
     message: "",
-    modal: true,
+    modal: false,
   });
   const fields = [
     { name: "name", placeholder: "Name", required: true },
