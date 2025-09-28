@@ -7,6 +7,7 @@ import { OrangeButton } from "../atoms";
 import { CartBoard } from "./CartBoard";
 import { getCart } from "@/lib";
 import { CartItem } from "@/types/CartItem";
+import { Ooops } from "./Ooops";
 
 export const Cart = ({
   setIsShown,
@@ -60,12 +61,18 @@ export const Cart = ({
             ✕
           </button>
         </div>
-        <CartBoard cart={cart ?? []} setCart={setCart} />
-        <Link href="/checkout" onClick={() => setIsShown(false)}>
-          <OrangeButton px={60} py={16}>
-            Go to checkout
-          </OrangeButton>
-        </Link>
+        {cart?.length == 0 ? (
+          <Ooops setIsShown={setIsShown} />
+        ) : (
+          <>
+            <CartBoard cart={cart ?? []} setCart={setCart} />
+            <Link href="/checkout" onClick={() => setIsShown(false)}>
+              <OrangeButton px={60} py={16}>
+                Go to checkout
+              </OrangeButton>
+            </Link>
+          </>
+        )}
       </div>
     </div>,
     document.body,

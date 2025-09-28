@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { deleteCartItem, getCart } from "@/lib";
 import { CartItem } from "@/types";
