@@ -2,8 +2,27 @@ import { Product } from "@/types";
 import Image from "next/image";
 import { OrangeButton } from "../atoms";
 import { CartIconWhite } from "../icons";
+import { Dispatch, SetStateAction } from "react";
 
-export const ProductInfo = ({ product }: { product: Product }) => {
+export const ProductInfo = ({
+  product,
+  selectedProduct,
+  setSelectedProduct,
+}: {
+  product: Product;
+  selectedProduct: {
+    quantity: number;
+    color: string;
+    size: "XS" | "S" | "M" | "L" | "XL";
+  };
+  setSelectedProduct: Dispatch<
+    SetStateAction<{
+      quantity: number;
+      color: string;
+      size: "XS" | "S" | "M" | "L" | "XL";
+    }>
+  >;
+}) => {
   return (
     <div className="flex flex-col gap-14">
       <div className="flex flex-col gap-[21px] font-semibold text-[32px]">
@@ -12,13 +31,18 @@ export const ProductInfo = ({ product }: { product: Product }) => {
       </div>
       <div className="flex flex-col gap-[48px] ">
         <div className="flex flex-col gap-4">
-          <div>Color: {product.color}</div>
+          <div>Color: {selectedProduct.color}</div>
           <div className="flex gap-[13px]">
             {product.available_colors.map((c) => (
               <div
                 key={c}
                 style={{ background: c }}
                 className="w-[38px] h-[38px] rounded-full border border-black"
+                onClick={() =>
+                  setSelectedProduct((prev) => {
+                    return { ...prev, color: c };
+                  })
+                }
               ></div>
             ))}
           </div>

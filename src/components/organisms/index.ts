@@ -6,3 +6,4 @@ export { ProductsList } from "./ProductsList";
 export { ProductInfo } from "./ProductInfo";
 export { Cart } from "./Cart";
 export { CartBoard } from "./CartBoard";
+export { Product } from "./Product";

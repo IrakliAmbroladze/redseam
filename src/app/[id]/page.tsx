@@ -1,4 +1,4 @@
-import { Breadcrumbs, ProductInfo } from "@/components";
+import { Breadcrumbs, Product } from "@/components";
 import { getProduct } from "@/lib";
 import Image from "next/image";
 
@@ -18,25 +18,7 @@ export default async function Page({
   return (
     <div className="px-[100px]">
       <Breadcrumbs id={id} />
-      <div className="flex justify-between">
-        <div className="flex gap-2.5">
-          <div className="flex flex-col gap-[9px]">
-            {data.images.map((image) => (
-              <Image
-                key={image}
-                src={image}
-                width={121}
-                height={161}
-                alt="image"
-              />
-            ))}
-          </div>
-          <Image src={data.cover_image} width={703} height={937} alt="image" />
-        </div>
-        <div className="w-[703px]">
-          <ProductInfo product={data} />
-        </div>
-      </div>
+      <Product product={data} />
     </div>
   );
 }
