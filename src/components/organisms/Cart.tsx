@@ -47,10 +47,10 @@ export const Cart = ({
   };
   return ReactDOM.createPortal(
     <div
-      className="fixed inset-0 bg-[#10151F]/30 flex items-center justify-end z-50"
+      className="fixed inset-0 bg-[#10151F]/30 flex items-center justify-end z-50 "
       onClick={handleOverlayClick}
     >
-      <div className="bg-white p-10 w-[540px] shadow-lg max-h-dvh  flex flex-col gap-20">
+      <div className="bg-white p-10 w-[540px] shadow-lg max-h-dvh  flex flex-col gap-20 h-full">
         <div className="flex justify-between">
           <div className="text-xl">Shopping Cart ({cart?.length || 0})</div>
           <button
@@ -60,7 +60,7 @@ export const Cart = ({
             ✕
           </button>
         </div>
-        <CartBoard cart={cart ?? []} />
+        <CartBoard cart={cart ?? []} setCart={setCart} />
         <Link href="/checkout" onClick={() => setIsShown(false)}>
           <OrangeButton px={60} py={16}>
             Go to checkout

@@ -1,5 +1,9 @@
+"use client";
 import { CartBoard, Input } from "@/components";
 import { Headline, OrangeButton } from "@/components/atoms";
+import { getCart } from "@/lib";
+import { CartItem } from "@/types";
+import { useEffect, useState } from "react";
 
 const CheckoutPage = () => {
   const fields = [
@@ -9,7 +13,33 @@ const CheckoutPage = () => {
     { name: "address", placeholder: "Address" },
     { name: "zipcode", placeholder: "Zip code" },
   ];
+  const [cart, setCart] = useState<CartItem[] | null>(null);
+  const [status, setStatus] = useState<{
+    message: string;
+    success: boolean;
+  } | null>(null);
 
+  useEffect(() => {
+    try {
+      const fetchCart = async () => {
+        const response = await getCart();
+        const { data } = response;
+        setCart(data);
+      };
+      fetchCart();
+    } catch (error) {
+      if (error instanceof Error) {
+        setStatus({ message: error.message, success: false });
+      } else {
+        setStatus({
+          message: "Unknown error while adding to cart",
+          success: false,
+        });
+      }
+    } finally {
+      console.log(status);
+    }
+  }, [status]);
   return (
     <div className="px-[100px]">
       <Headline> Checkout</Headline>
@@ -35,7 +65,7 @@ const CheckoutPage = () => {
           </div>
         </div>
         <div className="h-[635px] w-[460px] flex flex-col gap-20">
-          <CartBoard />
+          <CartBoard cart={cart ?? []} setCart={setCart} />
           <OrangeButton px={60} py={16}>
             pay
           </OrangeButton>
