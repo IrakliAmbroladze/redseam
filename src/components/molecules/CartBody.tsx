@@ -27,7 +27,11 @@ export const CartBody = ({
     try {
       const response = await deleteCartItem({ id, color, size });
       console.log(response);
-      setCart(cart.filter((p) => !(p.id === id)));
+      setCart(
+        cart.filter(
+          (p) => !(p.id === id && p.color === color && p.size === size),
+        ),
+      );
     } catch (error) {
       if (error instanceof Error) {
         setStatus({ message: error.message, success: false });

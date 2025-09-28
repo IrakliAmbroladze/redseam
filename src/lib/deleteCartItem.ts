@@ -18,6 +18,7 @@ export const deleteCartItem = async ({
     throw new Error("Unauthenticated. Please, login ot register!");
   }
   try {
+    console.log("starting fetch");
     const response = await fetch(
       `https://api.redseam.redberryinternship.ge/api/cart/products/${id}`,
       {
@@ -25,17 +26,18 @@ export const deleteCartItem = async ({
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
+          "Content-type": "application/json",
         },
         body: JSON.stringify({ color, size }),
       },
     );
-    const data = await response.json();
+
     if (!response.ok) {
-      throw new Error(data?.message ?? "Can not delete!");
+      throw new Error("Can not delete!");
     }
 
     revalidatePath("/");
-    return { message: "Product deleted!", data };
+    return { message: "Product deleted!" };
   } catch (e) {
     if (e instanceof Error) {
       console.error(e.message);
