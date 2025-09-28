@@ -10,7 +10,7 @@ export const CartBody = ({ cart }: { cart: CartItem[] }) => (
       >
         <div className="relative w-[100px] h-[134px]">
           <Image
-            src={item.images[0]}
+            src={item.images[item.available_colors.indexOf(item.color)]}
             alt="Preview"
             fill
             className="object-cover rounded-sm"
