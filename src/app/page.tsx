@@ -22,7 +22,7 @@ export default async function Home({
   const totalPages = dataObj.meta.last_page;
   return (
     <div className="px-[100px] flex flex-col">
-      <ProductsHeadLine />
+      <ProductsHeadLine metaData={dataObj.meta} />
       <ProductsList products={dataObj.data} />
       <Pagination totalPages={totalPages} />
     </div>
