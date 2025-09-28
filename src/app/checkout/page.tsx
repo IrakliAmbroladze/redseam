@@ -1,5 +1,5 @@
 "use client";
-import { CartBoard, Input } from "@/components";
+import { CartBoard, Input, Modal } from "@/components";
 import { Headline, OrangeButton } from "@/components/atoms";
 import { getCart } from "@/lib";
 import { CartItem } from "@/types";
@@ -9,6 +9,7 @@ import { useActionState, useEffect, useState } from "react";
 const CheckoutPage = () => {
   const [state, formAction, isPending] = useActionState(checkout, {
     message: "",
+    modal: true,
   });
   const fields = [
     { name: "name", placeholder: "Name", required: true },
@@ -76,6 +77,7 @@ const CheckoutPage = () => {
           </OrangeButton>
         </div>
       </form>
+      {state.modal && <Modal />}
     </div>
   );
 };
