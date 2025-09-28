@@ -1,17 +1,7 @@
 "use server";
 import { cookies } from "next/headers";
 
-export const addToCart = async ({
-  id,
-  quantity,
-  color,
-  size,
-}: {
-  id: number;
-  quantity: number;
-  color: string;
-  size: "XS" | "S" | "M" | "L" | "XL";
-}) => {
+export const getCart = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
 
@@ -20,19 +10,16 @@ export const addToCart = async ({
   }
   try {
     const response = await fetch(
-      `https://api.redseam.redberryinternship.ge/api/cart/products/${id}`,
+      `https://api.redseam.redberryinternship.ge/api/cart`,
       {
-        method: "POST",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ quantity, color, size }),
       },
     );
     const data = await response.json();
-
     if (!response.ok) {
       throw new Error(data?.message ?? "Can not log in, please Register!");
     }

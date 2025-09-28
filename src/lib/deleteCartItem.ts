@@ -1,14 +1,13 @@
 "use server";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-export const addToCart = async ({
+export const deleteCartItem = async ({
   id,
-  quantity,
   color,
   size,
 }: {
   id: number;
-  quantity: number;
   color: string;
   size: "XS" | "S" | "M" | "L" | "XL";
 }) => {
@@ -22,22 +21,21 @@ export const addToCart = async ({
     const response = await fetch(
       `https://api.redseam.redberryinternship.ge/api/cart/products/${id}`,
       {
-        method: "POST",
+        method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ quantity, color, size }),
+        body: JSON.stringify({ color, size }),
       },
     );
     const data = await response.json();
-
     if (!response.ok) {
-      throw new Error(data?.message ?? "Can not log in, please Register!");
+      throw new Error(data?.message ?? "Can not delete!");
     }
 
-    return { message: "Product added to cart!", data };
+    revalidatePath("/");
+    return { message: "Product deleted!", data };
   } catch (e) {
     if (e instanceof Error) {
       console.error(e.message);
@@ -49,6 +47,6 @@ export const addToCart = async ({
     } else {
       console.error("Uknown error: ", e);
     }
-    return { message: "Can not log in an user" };
+    return { message: "Cannot delete cart item" };
   }
 };
