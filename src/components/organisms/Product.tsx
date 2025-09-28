@@ -19,13 +19,18 @@ export const Product = ({ product }: { product: ProductType }) => {
     <div className="flex justify-between">
       <div className="flex gap-2.5">
         <div className="flex flex-col gap-[9px]">
-          {product.images.map((image) => (
+          {product.images.map((image, index) => (
             <Image
               key={image}
               src={image}
               width={121}
               height={161}
               alt="image"
+              onClick={() =>
+                setSelectedProduct((prev) => {
+                  return { ...prev, color: product.available_colors[index] };
+                })
+              }
             />
           ))}
         </div>
